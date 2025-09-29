@@ -1,0 +1,84 @@
+/* Container utama chatbot */
+.chatbot-container {
+  width: 100%;
+  max-width: 500px; /* biar tidak terlalu lebar */
+  margin: 0 auto;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  height: 500px; /* tinggi area chat */
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+/* Header chatbot */
+.chatbot-header {
+  background: #103071;
+  color: #fff;
+  padding: 12px 16px;
+  font-weight: bold;
+  text-align: center;
+  border-bottom: 1px solid #ccc;
+}
+
+/* Area pesan */
+.chatbot-messages {
+  flex: 1;
+  padding: 12px;
+  overflow-y: auto;
+  background: #f9f9f9;
+}
+
+/* Pesan user */
+.chatbot-message.user {
+  background: #103071;
+  color: #fff;
+  padding: 10px 14px;
+  border-radius: 16px;
+  margin: 6px 0;
+  max-width: 80%;
+  margin-left: auto;
+}
+
+/* Pesan bot */
+.chatbot-message.bot {
+  background: #e5e5ea;
+  color: #000;
+  padding: 10px 14px;
+  border-radius: 16px;
+  margin: 6px 0;
+  max-width: 80%;
+  margin-right: auto;
+}
+
+/* Input form */
+.chatbot-input {
+  display: flex;
+  border-top: 1px solid #ddd;
+}
+
+.chatbot-input input {
+  flex: 1;
+  border: none;
+  padding: 12px;
+  font-size: 14px;
+}
+
+.chatbot-input input:focus {
+  outline: none;
+}
+
+.chatbot-input button {
+  background: #103071;
+  color: #fff;
+  border: none;
+  padding: 0 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.chatbot-input button:hover {
+  background: #0d2558;
+}
