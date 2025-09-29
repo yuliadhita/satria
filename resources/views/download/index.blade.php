@@ -69,6 +69,7 @@
                                         <th>Periode</th>
                                         <th>Link Publikasi</th>
                                         <th>Tanggal Input</th>
+                                        <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -82,7 +83,21 @@
                                         <td class="text-start">{{ $item->periode }}</td>
                                         <td class="text-start">{{ $item->link_publikasi }}</td>
                                         <td class="text-start">{{ $item->tanggal_input }}</td>
-                                        
+                                        <td>
+                                    <div class="grid">
+                                    <div class="d-flex">
+                                    <a href="{{ route('form.edit', $item->id) }}" class="btn btn-info btn-sm " 
+                                            style="display: flex;
+                                            align-items: center; 
+                                            justify-content: center;  
+                                            height: auto;
+                                            margin-top: 3px;
+                                            margin-bottom: 3px;  
+                                            padding: 5px 10px;">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                </div>
+                                    </td>
                                     </tr>
                                     @endforeach
                                 </tbody>

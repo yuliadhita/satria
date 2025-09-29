@@ -6,13 +6,14 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\DownloadController;
 use App\Http\Controllers\KelolaController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PanduanController;
 
 // -------------------------------------------------------------------
 // Halaman Home
 // -------------------------------------------------------------------
-Route::get('/', function () {
-    return view('home');
-})->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
 Route::get('/chatbot', function () {
     return view('chatbot');
 })->name('chatbot');
@@ -71,5 +72,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
                 Route::post('/indikator/store', [KelolaController::class, 'storeDataStrategis'])->name('indikator.store');
                 Route::put('/indikator/{id}/update-flag', [KelolaController::class, 'updateFlagDataStrategis'])->name('indikator.updateFlag');
           
+        });
+
+        // Panduan
+        Route::prefix('panduan')->name('panduan.')->group(function () {
+            Route::get('/', [PanduanController::class, 'index'])->name('index');
+            Route::get('/upload', [PanduanController::class, 'uploadPanduan'])->name('upload.form');
+            Route::post('/upload', [PanduanController::class, 'storePanduan'])->name('upload');
         });
 });

@@ -19,4 +19,15 @@ class DataStrategis extends Model
         'nama',
         'icon',
     ];
+
+    public function formData()
+    {
+        return $this->hasMany(FormData::class, 'id_data', 'id_data');
+    }
+
+    public function latestFormData()
+    {
+        return $this->hasOne(FormData::class, 'id_data', 'id_data')
+                    ->latest('tanggal_input');
+    }
 }

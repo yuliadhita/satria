@@ -15,11 +15,8 @@
 
             <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
                 <div>
-                    <h2 class="fw-bold mb-3">Edit Form</h2>
-                    <h6 class="op-7 mb-2">Edit Form Registrasi Bukti Dukung Administrasi BPS Provinsi DKI Jakarta</h6>
-                </div>
-                <div class="ms-md-auto py-2 py-md-0">
-                    <a href="{{ route('monitoring.operator.index') }}" class="btn btn-danger btn-round">Kembali</a>
+                    <h2 class="fw-bold mb-3">Edit Data Strategis</h2>
+                    <h6 class="op-7 mb-2">Edit data strategis yang ada di sistem</h6>
                 </div>
             </div>
 

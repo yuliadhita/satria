@@ -22,6 +22,8 @@
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome 5 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -217,7 +219,8 @@
                         <div class="col-lg-12 text-center">
                             <div class="content">
                                 <!--<h3>About Us</h3>-->
-                                <h2>Data Strategis Kabupaten Tulungagung</h2>
+                                <h2 class="fw-bold display-6">Data Strategis Kabupaten Tulungagung</h2>
+
                             </div>
                         </div>
                         <!-- Icon Boxes Swiper -->
@@ -226,66 +229,27 @@
                           <!-- Swiper -->
                           <div class="swiper icon-swiper">
                             <div class="swiper-wrapper">
-                              
-                              <!-- Icon Box 1 -->
-                        <div class="swiper-slide !w-[calc(100%-1rem)] md:!w-[280px] !h-auto">
-                          <div class="icon-box text-center p-6 bg-white rounded-xl shadow hover:shadow-lg transition">
-                            <i class="bi bi-graph-up text-primary-4 text-4xl mb-3"></i>
-                            <h3 class="font-bold text-lg">Inflasi</h3>
-                            <p class="text-gray-600 text-sm">15% (Agustus 2025)</p>
-                          </div>
-                        </div>
-
-                        <!-- Icon Box 2 -->
-                        <div class="swiper-slide !w-[calc(100%-1rem)] md:!w-[280px] !h-auto">
-                          <div class="icon-box text-center p-6 bg-white rounded-xl shadow hover:shadow-lg transition">
-                            <i class="bi bi-bar-chart-line text-primary-4 text-4xl mb-3"></i>
-                            <h3 class="font-bold text-lg">PDRB ADHK</h3>
-                            <p class="text-gray-600 text-sm">152.326,45 Miliar Rupiah</p>
-                          </div>
-                        </div>
-
-                        <!-- Icon Box 3 -->
-                        <div class="swiper-slide !w-[calc(100%-1rem)] md:!w-[280px] !h-auto">
-                          <div class="icon-box text-center p-6 bg-white rounded-xl shadow hover:shadow-lg transition">
-                            <i class="bi bi-people text-primary-4 text-4xl mb-3"></i>
-                            <h3 class="font-bold text-lg">Jumlah Penduduk</h3>
-                            <p class="text-gray-600 text-sm">1.080.000 Jiwa</p>
-                          </div>
-                        </div>
-
-                        <!-- Icon Box 4 -->
-                        <div class="swiper-slide !w-[calc(100%-1rem)] md:!w-[280px] !h-auto">
-                          <div class="icon-box text-center p-6 bg-white rounded-xl shadow hover:shadow-lg transition">
-                            <i class="bi bi-person-workspace text-primary-4 text-4xl mb-3"></i>
-                            <h3 class="font-bold text-lg">Tingkat Pengangguran</h3>
-                            <p class="text-gray-600 text-sm">4,2%</p>
-                          </div>
-                        </div>
-
-                        <!-- Icon Box 5 -->
-                        <div class="swiper-slide !w-[calc(100%-1rem)] md:!w-[280px] !h-auto">
-                          <div class="icon-box text-center p-6 bg-white rounded-xl shadow hover:shadow-lg transition">
-                            <i class="bi bi-mortarboard text-primary-4 text-4xl mb-3"></i>
-                            <h3 class="font-bold text-lg">IPM</h3>
-                            <p class="text-gray-600 text-sm">72,35</p>
-                          </div>
-                        </div>
-
-                        <!-- Icon Box 6 -->
-                        <div class="swiper-slide !w-[calc(100%-1rem)] md:!w-[280px] !h-auto">
-                          <div class="icon-box text-center p-6 bg-white rounded-xl shadow hover:shadow-lg transition">
-                            <i class="bi bi-clipboard-data text-primary-4 text-4xl mb-3"></i>
-                            <h3 class="font-bold text-lg">Pertumbuhan Ekonomi</h3>
-                            <p class="text-gray-600 text-sm">5,12%</p>
-                          </div>
-                        </div>
-
+                              @foreach($indikator as $item)
+                                @if($item->latestFormData)
+                                  <div class="swiper-slide !w-[calc(100%-1rem)] md:!w-[280px] !h-auto">
+                                    <div class="icon-box text-center p-6 bg-white rounded-xl shadow hover:shadow-lg transition">
+                                      <i class="{{ $item->icon }} text-primary-4 text-4xl mb-3"></i>
+                                      <h3 class="font-bold text-lg">{{ $item->nama }}</h3>
+                                      <p class="text-gray-600 text-sm">
+                                        {{ $item->latestFormData->nilai }} {{ $item->latestFormData->satuan }}
+                                        ({{ $item->latestFormData->periode }})
+                                      </p>
+                                    </div>
+                                  </div>
+                                @endif
+                              @endforeach
                             </div>
+
                             <!-- Tombol navigasi -->
                             <div class="swiper-button-next custom-btn"></div>
                             <div class="swiper-button-prev custom-btn"></div>
-                        </div>  
+                          </div>
+ 
                         </div>
                         </div>
 

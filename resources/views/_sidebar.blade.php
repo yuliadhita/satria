@@ -63,14 +63,14 @@
                     </span>
                     <h4 class="text-section">Kelola</h4>
                 </li>
-                <li class="nav-item {{ request()->routeIs('*') || request()->routeIs('manage.user.create') || request()->routeIs('manage.user.edit') ? 'active' : '' }}">
+                <li class="nav-item {{ request()->routeIs('kelola.indikator.index')|| request()->routeIs('kelola.indikator.create') || request()->routeIs('kelola.indikator.edit') ? 'active' : '' }}">
                     <a href="{{ route('kelola.indikator.index') }}">
                         <i class="fas fa-folder-open"></i>
                         <p>Indikator</p>
                     </a>
                 </li>
                 <li class="nav-item {{ request()->routeIs('panduan.index') ? 'active' : '' }}">
-                    
+                    <a href="{{ route('panduan.index') }}">
                         <i class="fas fa-book"></i>
                         <p>Panduan</p>
                     </a>

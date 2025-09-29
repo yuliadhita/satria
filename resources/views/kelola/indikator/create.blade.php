@@ -1,4 +1,4 @@
-@extends('layouts/app')
+@extends('layouts.app')
 
 @section('stylecss')
 <!-- Bootstrap 5 -->
@@ -13,6 +13,7 @@
 <!-- Select2 CSS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
+
 @endsection
 
 @section('content')
