@@ -43,6 +43,9 @@
 
 <!-- Custom CSS -->
 <style>
+/* Flexbox container for alignment */
+
+
   .swiper {
     position: relative;
     padding: 40px 0;
@@ -225,21 +228,23 @@
                         </div>
                         <!-- Icon Boxes Swiper -->
                         <div class="relative w-full mt-10">
-
                           <!-- Swiper -->
                           <div class="swiper icon-swiper">
                             <div class="swiper-wrapper">
                               @foreach($indikator as $item)
                                 @if($item->latestFormData)
                                   <div class="swiper-slide !w-[calc(100%-1rem)] md:!w-[280px] !h-auto">
-                                    <div class="icon-box text-center p-6 bg-white rounded-xl shadow hover:shadow-lg transition">
-                                      <i class="{{ $item->icon }} text-primary-4 text-4xl mb-3"></i>
-                                      <h3 class="font-bold text-lg">{{ $item->nama }}</h3>
-                                      <p class="text-gray-600 text-sm">
-                                        {{ $item->latestFormData->nilai }} {{ $item->latestFormData->satuan }}
-                                        ({{ $item->latestFormData->periode }})
-                                      </p>
-                                    </div>
+                                    <!-- Membungkus icon-box dengan link yang mengarah ke halaman yang diinginkan -->
+                                    <a href="{{ $item->latestFormData->link_publikasi }}" class="w-full">
+                                      <div class="icon-box text-center p-6 bg-white rounded-xl shadow hover:shadow-lg transition">
+                                        <i class="{{ $item->icon }} text-primary-4 text-4xl mb-3"></i>
+                                        <h3 class="font-bold text-lg">{{ $item->nama }}</h3>
+                                        <p class="text-gray-600 text-sm">
+                                          {{ $item->latestFormData->nilai }} {{ $item->latestFormData->satuan }}
+                                          ({{ $item->latestFormData->periode }})
+                                        </p>
+                                      </div>
+                                    </a>
                                   </div>
                                 @endif
                               @endforeach
@@ -249,8 +254,6 @@
                             <div class="swiper-button-next custom-btn"></div>
                             <div class="swiper-button-prev custom-btn"></div>
                           </div>
- 
-                        </div>
                         </div>
 
 
@@ -289,6 +292,7 @@
         spaceBetween: 16,
         grabCursor: true,
         loop: true,
+        loopAdditionalSlides: 4,
         centeredSlides: true,
         navigation: {
         nextEl: ".swiper-button-next",
@@ -304,10 +308,23 @@
         disableOnInteraction: false, // tetap jalan meski user swipe manual
         },
         breakpoints: {
-        640: { slidesPerView: 1 },
-        1024: { slidesPerView: 2 },
-        1280: { slidesPerView: 3 },
+        320: {
+            slidesPerView: 1, // 1 slide per view untuk layar kecil
+            spaceBetween: 10, // Space lebih kecil di layar kecil
+        },
+        640: {
+            slidesPerView: 1, // 1 slide per view
+            spaceBetween: 20, // Space lebih besar di layar menengah
+        },
+        1024: {
+            slidesPerView: 2, // 2 slide per view untuk layar besar
+            spaceBetween: 30, // Space antar slide
+        },
+        1280: {
+            slidesPerView: 3, // 3 slide per view untuk layar lebih besar
+            spaceBetween: 40, // Space antar slide
         }
+    },
     });
     </script>
 </body>

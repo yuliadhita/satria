@@ -8,6 +8,9 @@ use App\Http\Controllers\DownloadController;
 use App\Http\Controllers\KelolaController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PanduanController;
+use App\Http\Controllers\ChatbotController;
+use App\Http\Controllers\HomeDataController;
+
 
 // -------------------------------------------------------------------
 // Halaman Home
@@ -17,6 +20,15 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/chatbot', function () {
     return view('chatbot');
 })->name('chatbot');
+
+// API endpoint untuk fetch chat
+Route::post('/chatbot/send', [ChatbotController::class, 'sendMessage'])->name('chatbot.send');
+Route::get('/chatbot/callback', [ChatbotController::class, 'handleCallback']);
+
+Route::prefix('data')->name('data.')->group(function () {
+    Route::get('/', [HomeDataController::class, 'index'])->name('index');
+    Route::post('/proses', [HomeDataController::class, 'download'])->name('proses');
+});
 
 // -------------------------------------------------------------------
 // Auth & Verifikasi

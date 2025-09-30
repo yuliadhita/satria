@@ -22,7 +22,6 @@ class FormData extends Model
         'nilai',
         'satuan',
         'periode',
-        'tanggal_input',
         'link_publikasi',
     ];
 
@@ -33,12 +32,12 @@ class FormData extends Model
      // Relasi ke DataStrategis
     public function dataStrategis()
     {
-        return $this->belongsTo(DataStrategis::class, 'id_data');
+        return $this->belongsTo(DataStrategis::class, 'id_data', 'id_data');
     }
 
     // Relasi ke Pegawai
-    public function pegawai()
+    public function user()
     {
-        return $this->belongsTo(Pegawai::class, 'id_pegawai');
+        return $this->belongsTo(User::class, 'id_pegawai', 'id');
     }
 }

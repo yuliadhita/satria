@@ -37,7 +37,7 @@
                         <span class="profile-username">
                             <span class="op-7">Hi,</span>
                             @if (Auth::user())
-                            <span class="fw-bold">{{ Auth::user()->username }}</span>
+                            <span class="fw-bold">{{ Auth::user()->name }}</span>
                             @endif
                         </span>
                     </a>

@@ -39,7 +39,7 @@
                 <select class="form-select" id="id_data" name="id_data" required>
                     <option value="" disabled selected hidden>Pilih Indikator</option>
                     @foreach ($dataStrategis as $item)
-                    <option value="{{ $item->nama }}">{{ $item->nama }}</option>
+                    <option value="{{ $item->id_data }}">{{ $item->nama }}</option>
                     @endforeach
                 </select>
                 @error('id_data')
@@ -79,17 +79,6 @@
                 <input type="text" class="form-control" id="periode" name="periode" placeholder="Masukkan periode data"
                     required>
                 @error('periode')
-                <small class="text-danger">{{ $message }}</small>
-                @enderror
-            </div>
-
-            <!-- Tanggal Input -->
-            <div class="mb-3">
-                <label for="tanggal_input" class="form-label">Tanggal Input
-                    <span class="text-danger">*</span>
-                </label>
-                <input type="date" class="form-control" id="tanggal_input" name="tanggal_input" required>
-                @error('tanggal_input')
                 <small class="text-danger">{{ $message }}</small>
                 @enderror
             </div>

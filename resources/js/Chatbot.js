@@ -195,44 +195,22 @@ function Chatbot() {
     setLoading(true);
 
     try {
-      // Kirim langsung ke Gemini tanpa pencarian training data lokal
-      const response = await fetch(
-        "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-8b:generateContent",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "x-goog-api-key": "AIzaSyBwTE_iWrs3-jgHJYCvEn8bVkp0zrmWIVM",
-          },
-          body: JSON.stringify({
-            contents: [
-              {
-                parts: [
-                  {
-                    text: `${INITIAL_PROMPT}\n\nPertanyaan pengguna: ${input}\n\nBerikan jawaban yang ringkas, jelas, relevan, dan jika perlu sertakan rujukan resmi BPS.`,
-                  },
-                ],
-              },
-            ],
-          }),
-        }
-      );
+    const response = await fetch('/chatbot/send', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prompt: input })
+    });
 
-      const data = await response.json();
-      const botMessage = {
-        role: "assistant",
-        content: data.candidates[0].content.parts[0].text,
-      };
+    const data = await response.json();
 
-      setMessages((prev) => [...prev, botMessage]);
-    } catch (error) {
-      console.error("Error:", error);
-      const errorMessage = {
-        role: "assistant",
-        content: "Maaf, terjadi kesalahan. Silakan coba lagi.",
-      };
-      setMessages((prev) => [...prev, errorMessage]);
+    if (data.message) {
+        setMessages((prev) => [...prev, { role: 'assistant', content: data.message }]);
     }
+} catch (error) {
+    console.error('Error parsing response:', error);
+    setMessages((prev) => [...prev, { role: 'assistant', content: 'Sorry, something went wrong.' }]);
+}
+
 
     setLoading(false);
   };

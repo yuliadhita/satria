@@ -1,4 +1,5 @@
-@extends('layouts/app')
+@extends('layouts.app')
+
 @section('content')
 <div class="container">
     <div class="page-inner">
@@ -7,8 +8,8 @@
                 <h3 class="fw-bold mb-3">Dashboard Admin</h3>
                 <h6 class="op-7 mb-2">Lihat ringkasan data strategis yang telah diinput</h6>
             </div>
-
         </div>
+
         <div class="row">
             <div class="col-sm-6 col-md-3">
                 <div class="card card-stats card-round">
@@ -48,7 +49,9 @@
                     </div>
                 </div>
             </div>
-           
+        </div>
+
+        <!-- Statistik Data Strategis -->
         <div class="row justify-content-center">
             <div class="col-md-10 center">
                 <div class="card card-round">
@@ -72,79 +75,53 @@
                 var ctx = document.getElementById('statisticsChart').getContext('2d');
 
                 new Chart(ctx, {
-                    type: 'bar',
+                    type: 'bar', // Menggunakan Bar Chart
                     data: {
-                        labels: ['Jumlah Data'],
+                        labels: ['Indikator', 'Data Strategis'], // Menampilkan kedua kategori pada sumbu X
                         datasets: [{
-                            label: 'Indikator',
-                            backgroundColor: '#0dcaf0',
-                            data: [Number({{ $data['totalIndikator'] }})],
-                            barPercentage: 0.8
+                            label: 'Indikator', // Label pertama
+                            backgroundColor: '#0dcaf0', // Warna untuk data pertama
+                            data: [{{ $data['totalIndikator'] }}, 0], // Data untuk Indikator, Data Strategis = 0
+                            borderWidth: 1, // Lebar border untuk batang
+                            barThickness: 30, // Menyesuaikan ketebalan batang
+                            categoryPercentage: 0.5, // Menjaga batang berada di tengah
+                            barPercentage: 0.8, // Menyelaraskan batang di tengah
                         }, {
-                            label: 'Data Strategis',
-                            backgroundColor: '#ffc107',
-                            data: [Number({{ $data['totalData'] }})],
-                            barPercentage: 0.8
+                            label: 'Data Strategis', // Label kedua
+                            backgroundColor: '#ffc107', // Warna untuk data kedua
+                            data: [0, {{ $data['totalData'] }}], // Data untuk Data Strategis, Indikator = 0
+                            borderWidth: 1, // Lebar border untuk batang
+                            barThickness: 30, // Menyesuaikan ketebalan batang
+                            categoryPercentage: 0.5, // Menjaga batang berada di tengah
+                            barPercentage: 0.8, // Menyelaraskan batang di tengah
                         }]
-
                     },
                     options: {
                         responsive: true,
-                        maintainAspectRatio: false,
+                        maintainAspectRatio: false, // Agar chart responsif
                         plugins: {
                             legend: {
-                                display: true,
-                                position: 'bottom'
+                                display: true, // Menampilkan legenda di bawah chart
+                                position: 'bottom' // Posisi legend
                             }
                         },
                         scales: {
                             y: {
-                                min: 0,
-                                beginAtZero: true,
+                                min: 0, // Sumbu Y dimulai dari 0
+                                beginAtZero: true, // Memastikan sumbu Y dimulai dari nol
                                 ticks: {
-                                    stepSize: 1
+                                    stepSize: 1 // Menentukan langkah angka pada sumbu Y
                                 }
                             },
-                             x: {
-                                stacked: false    // <--- ini penting biar batang tidak numpuk
+                            x: {
+                                stacked: false, // Agar batang chart tidak tumpang tindih
                             }
                         }
                     }
                 });
             });
         </script>
-
-        <style>
-            .dot {
-                height: 10px;
-                width: 10px;
-                border-radius: 50%;
-                display: inline-block;
-                margin-right: 5px;
-            }
-        </style>
         @endpush
     </div>
 </div>
 @endsection
-
-@push('scripts')
-<script>
-    function formatRupiah(number) {
-        return new Intl.NumberFormat('id-ID', {
-            style: 'currency',
-            currency: 'IDR',
-            minimumFractionDigits: 0,
-            maximumFractionDigits: 0
-        }).format(number).replace(/\s+/g, "");
-    }
-
-    document.addEventListener('DOMContentLoaded', function() {
-        const nominalElements = document.querySelectorAll('.nominal-currency');
-        nominalElements.forEach(element => {
-            const rawValue = element.textContent;
-            element.textContent = formatRupiah(rawValue);
-        });
-    });
-</script>
-@endpush

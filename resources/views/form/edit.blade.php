@@ -20,159 +20,76 @@
                 </div>
             </div>
 
-            <form action="{{ route('form.update', $fp->id) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('form.update', $formData->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
 
-                <!-- Nomor Form Pengajuan -->
+                <!-- Data Strategis -->
                 <div class="mb-3">
-                    <label for="no_fp" class="form-label">Nomor FP
+                    <label for="id_data" class="form-label">Indikator
                         <span class="text-danger">*</span>
                     </label>
-                    <input type="text" class="form-control" id="no_fp" name="no_fp" placeholder="Masukkan nomor FP"
-                        value="{{ $fp->no_fp }}" disabled>
-                    @error('no_fp')
-                        <small class="text-danger">{{ $message }}</small>
-                    @enderror
-                </div>
-
-                <!-- Rincian Output -->
-                <div class="mb-3">
-                    <label for="id_output" class="form-label">Rincian Output
-                        <span class="text-danger">*</span>
-                    </label>
-                    <select class="form-select" id="id_output" name="id_output" required>
-                        <option value="" disabled selected hidden>Pilih Rincian Output</option>
-                        @foreach ($output as $item)
-                            <option value="{{ $item->id }}"
-                                {{ $fp->id_output == $item->id ? 'selected' : '' }}>
-                                {{ $item->output }}
+                    <select class="form-select" id="id_data" name="id_data" required>
+                        <option value="" disabled selected hidden>Pilih Indikator</option>
+                        @foreach ($dataStrategis as $item)
+                            <option value="{{ $item->id_data }}"
+                                {{ $formData->id_data == $item->id_data ? 'selected' : '' }}>
+                                {{ $item->nama }}
                             </option>
                         @endforeach
                     </select>
-                    @error('id_output')
-                        <small class="text-danger">{{ $message }}</small>
+
+                    @error('id_data')
+                    <small class="text-danger">{{ $message }}</small>
                     @enderror
                 </div>
 
-                <!-- Komponen -->
+                
+                <!-- Nilai Data -->
                 <div class="mb-3">
-                    <label for="id_komponen" class="form-label">Komponen
+                    <label for="nilai" class="form-label">Nilai Data
                         <span class="text-danger">*</span>
                     </label>
-                    <select class="form-select" id="id_komponen" name="id_komponen" required>
-                        <option value="" disabled selected hidden>Pilih Komponen</option>
-                        @foreach ($komponen as $item)
-                            <option value="{{ $item->id }}"
-                                {{ $fp->id_komponen == $item->id ? 'selected' : '' }}>
-                                {{ $item->komponen }}
-                            </option>
-                        @endforeach
-                    </select>
-                    @error('id_komponen')
-                        <small class="text-danger">{{ $message }}</small>
+                    <input type="text" class="form-control" id="nilai" name="nilai" placeholder="Masukkan nilai data" value="{{ old('nilai', $formData->nilai) }}"
+                        required>
+                    @error('nilai')
+                    <small class="text-danger">{{ $message }}</small>
                     @enderror
                 </div>
 
-                <!-- Sub Komponen -->
+                <!-- Satuan -->
                 <div class="mb-3">
-                    <label for="kode_subkomponen" class="form-label">Sub Komponen
+                    <label for="satuan" class="form-label">Satuan
                         <span class="text-danger">*</span>
                     </label>
-                    <select class="form-select" id="id_subkomponen" name="id_subkomponen" required>
-                        <option value="" disabled selected hidden>Pilih Sub Komponen</option>
-                        @foreach ($subKomponen as $item)
-                            <option value="{{ $item->id }}"
-                                {{ $fp->id_subkomponen == $item->id ? 'selected' : '' }}>
-                                {{ $item->sub_komponen }}
-                            </option>
-                        @endforeach
-                    </select>
-                    @error('id_subkomponen')
-                        <small class="text-danger">{{ $message }}</small>
+                    <input type="text" class="form-control" id="satuan" name="satuan" placeholder="Masukkan satuan data" value="{{ old('satuan', $formData->satuan) }}"
+                        required>
+                    @error('satuan')
+                    <small class="text-danger">{{ $message }}</small>
                     @enderror
                 </div>
 
-                <!-- Akun Belanja -->
+                <!-- Periode -->
                 <div class="mb-3">
-                    <label for="kode_akun" class="form-label">Akun
+                    <label for="periode" class="form-label">Periode
                         <span class="text-danger">*</span>
                     </label>
-                    <select class="form-select" id="id_akun_belanja" name="id_akun_belanja" required>
-                        <option value="" disabled selected hidden>Pilih Akun</option>
-                        @foreach ($akunBelanja as $item)
-                            <option value="{{ $item->id }}"
-                                {{ $fp->id_akun_belanja == $item->id ? 'selected' : '' }}>
-                                {{ $item->nama_akun }}
-                            </option>
-                        @endforeach
-                    </select>
-                    @error('id_akun_belanja')
-                        <small class="text-danger">{{ $message }}</small>
+                    <input type="text" class="form-control" id="periode" name="periode" placeholder="Masukkan periode data" value="{{ old('periode', $formData->periode) }}"
+                        required>
+                    @error('periode')
+                    <small class="text-danger">{{ $message }}</small>
                     @enderror
                 </div>
 
-                <!-- Tanggal Mulai Kegiatan -->
+                <!-- Link Publikasi -->
                 <div class="mb-3">
-                    <label for="tanggal_mulai" class="form-label">Tanggal Mulai Kegiatan
+                    <label for="link_publikasi" class="form-label">Link Publikasi
                         <span class="text-danger">*</span>
                     </label>
-                    <input type="date" class="form-control" id="tanggal_mulai" name="tanggal_mulai"
-                        value="{{ $fp->tanggal_mulai }}" required>
-                    @error('tanggal_mulai')
-                        <small class="text-danger">{{ $message }}</small>
-                    @enderror
-                </div>
-
-                <!-- Tanggal Akhir Kegiatan -->
-                <div class="mb-3">
-                    <label for="tanggal_akhir" class="form-label">Tanggal Akhir Kegiatan
-                        <span class="text-danger">*</span>
-                    </label>
-                    <input type="date" class="form-control" id="tanggal_akhir" name="tanggal_akhir"
-                        value="{{ $fp->tanggal_akhir }}" required>
-                    @error('tanggal_akhir')
-                        <small class="text-danger">{{ $message }}</small>
-                    @enderror
-                </div>
-
-                <!-- Nomor SK/Surat Tugas -->
-                <div class="mb-3">
-                    <label for="no_sk" class="form-label">Nomor SK/Surat Tugas
-                        <span class="text-danger">*</span>
-                    </label>
-                    <input type="text" class="form-control" id="no_sk" name="no_sk" placeholder="Masukkan nomor SK"
-                        value="{{ $fp->no_sk }}" required>
-                    @error('no_sk')
-                        <small class="text-danger">{{ $message }}</small>
-                    @enderror
-                </div>
-
-                <!-- Uraian/Nama Permintaan -->
-                <div class="mb-3">
-                    <label for="uraian" class="form-label">Uraian
-                        <span class="text-danger">*</span>
-                    </label>
-                    <input type="text" class="form-control" id="uraian" name="uraian" placeholder="Masukkan uraian"
-                        value="{{ $fp->uraian }}" required>
-                    @error('uraian')
-                        <small class="text-danger">{{ $message }}</small>
-                    @enderror
-                </div>
-
-                <!-- Nominal -->
-                <div class="mb-3">
-                    <label for="nominal" class="form-label">Nominal
-                        <span class="text-danger">*</span>
-                    </label>
-                    <div class="input-group">
-                        <span class="input-group-text">Rp</span>
-                        <input type="text" class="form-control" id="nominal" name="nominal"
-                            placeholder="Masukkan nominal" value="{{ old('nominal', $fp->nominal) }}"
-                            oninput="formatNumber(this)" required>
-                    </div>
-                    @error('nominal')
-                        <small class="text-danger">{{ $message }}</small>
+                    <input type="text" class="form-control" id="link_publikasi" name="link_publikasi" placeholder="Masukkan Link Publikasi" value="{{ old('link_publikasi', $formData->link_publikasi) }}"
+                        required>
+                    @error('link_publikasi')
+                    <small class="text-danger">{{ $message }}</small>
                     @enderror
                 </div>
 

@@ -23,11 +23,11 @@
         <form method="GET" action="{{ route('download.index') }}">
             <div class="d-flex justify-content-between">
                 <div class="mb-3" style="flex: 1; margin-right: 20px">
-                    <label for="tanggalInput" class="form-label">Tanggal Input Data</label>
-                    <input type="date" class="form-control" name="tanggal_inpit" id="tanggalInput" value="{{ request('tanggal_mulai') }}" />
+                    <label for="tanggalInput" class="form-label">Tanggal Input Data Awal</label>
+                    <input type="date" class="form-control" name="tanggal_mulai" id="tanggalMulai" value="{{ request('tanggal_mulai') }}" />
                 </div>
                 <div class="mb-3" style="flex: 1">
-                    <label for="tanggalAkhir" class="form-label">Tanggal Akhir Kegiatan</label>
+                    <label for="tanggalAkhir" class="form-label">Tanggal Input Data Akhir</label>
                     <input type="date" class="form-control" name="tanggal_akhir" id="tanggalAkhir" value="{{ request('tanggal_akhir') }}" />
                 </div>
             </div>
@@ -84,20 +84,27 @@
                                         <td class="text-start">{{ $item->link_publikasi }}</td>
                                         <td class="text-start">{{ $item->tanggal_input }}</td>
                                         <td>
-                                    <div class="grid">
-                                    <div class="d-flex">
-                                    <a href="{{ route('form.edit', $item->id) }}" class="btn btn-info btn-sm " 
-                                            style="display: flex;
-                                            align-items: center; 
-                                            justify-content: center;  
-                                            height: auto;
-                                            margin-top: 3px;
-                                            margin-bottom: 3px;  
-                                            padding: 5px 10px;">
-                                        <i class="fas fa-edit"></i>
-                                    </a>
-                                </div>
-                                    </td>
+                                            <div class="grid">
+                                                <div class="d-flex justify-content-end">
+                                                    <!-- Edit Button -->
+                                                    <button type="button" class="btn btn-info btn-sm d-flex align-items-center justify-content-center" 
+                                                            style="height: auto; margin-top: 3px; margin-bottom: 3px; padding: 5px 10px;"
+                                                            onclick="window.location='{{ route('form.edit', $item->id) }}'"
+                                                            title="Edit Data">
+                                                        <i class="fas fa-edit"></i>
+                                                    </button>
+
+                                                    <!-- Delete Button with Modal Trigger -->
+                                                    <button type="button" class="btn btn-danger btn-sm" 
+                                                            data-bs-toggle="modal" 
+                                                            data-bs-target="#deleteModalCenter-{{ $item->id }}" 
+                                                            title="Hapus Data" 
+                                                            style="height: auto; margin-top: 3px; margin-bottom: 3px; padding: 5px 10px;">
+                                                        <i class="fas fa-trash-alt"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </td>
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -132,6 +139,38 @@
 </script>
 @endsection
 
+<!-- Modal Delete -->
+@section('modal-delete')
+@foreach ($formData as $item)
+<div class="modal fade" id="deleteModalCenter-{{ $item->id }}" tabindex="-1" 
+     aria-labelledby="deleteModalLabel-{{ $item->id }}" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel-{{ $item->id }}">Konfirmasi Hapus</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Apakah Anda yakin ingin menghapus data ini? Data yang dihapus tidak dapat dikembalikan.
+            </div>
+            <div class="modal-footer">
+                <!-- Batal Button -->
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+
+                <!-- Hapus Button -->
+                <form action="{{ route('form.delete', $item->id) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger">Hapus</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@endforeach
+@endsection
+<!-- End Modal Delete -->
+<!-- Script Section -->
 @push('scripts')
 <script>
     function formatRupiah(number) {
@@ -158,9 +197,33 @@
 @endpush
 
 @push('scripts')
+
 <script>
+   $(document).ready(function() {
+    // Mengecek apakah DataTable sudah diinisialisasi
+    if (!$.fn.dataTable.isDataTable('#example')) {
+        $('#example').DataTable({
+            "ordering": true, // Mengaktifkan sorting di kolom lainnya
+            "columnDefs": [
+                {
+                    "targets": 0,  // Kolom pertama (checkbox)
+                    "orderable": false, // Menonaktifkan sorting di kolom ini
+                },
+                {
+                    "targets": '_all',  // Semua kolom lainnya diizinkan untuk sorting
+                    "orderable": true,  // Menyortir kolom lainnya
+                }
+            ]
+        });
+    }
+});
+
+</script>
+
+<script>
+    
     $(document).ready(function() {
-        $('#akun').select2({
+        $('#dataStrategis').select2({
             allowClear: false,
             theme: 'bootstrap'
         });

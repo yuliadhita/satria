@@ -7,6 +7,7 @@
     <title>Statistik Tulungagung Terintegrasi dan Andal</title>
     <meta name="description" content="">
     <meta name="keywords" content="">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Favicons -->
     <link rel="icon" href="{{ asset('/assets/img/logo.png') }}" type="image/x-icon" />
@@ -184,6 +185,7 @@
                             <div class="card-body p-4">
                                 <div id="chatbot-app" class="w-100">
                                     <!-- Tempat chatbot akan dimuat -->
+                                    
                                     <!-- Tempat Chatbot -->
                                     <div id="chatbot-root" class="w-100"></div>
 

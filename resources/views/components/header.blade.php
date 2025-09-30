@@ -9,20 +9,26 @@
 
             <nav id="navmenu" class="navmenu">
                 <ul>
-                    <li><a href="#hero" class="active">Home</a></li>
+                    <li><a href="{{route('home')}}#hero" class="{{ request()->is('/') ? 'active' : '' }}">Home</a></li>
                     
-                    <li><a href="#about">Data Strategis</a></li>
-                    <li><a href="{{ route('chatbot') }}">Chatbot</a></li>
-                    <!-- <li>
-                        <div class="d-flex">
-                            <a href="{{ route('login') }}" class="btn-get-started fw-semibold">Login</a>
-                        </div>
-                    </li> -->
+                    <li><a href="{{route('home')}}#about" class="{{ request()->is('#about') ? 'active' : '' }}">Data Strategis</a></li>
+                    <li><a href="{{route('data.index')}}" class="{{ request()->routeIs('data.index') ? 'active' : '' }}">Download Data Strategis</a></li>
+                    <li><a href="{{ route('chatbot') }}" class="{{ request()->routeIs('chatbot') ? 'active' : '' }}">Chatbot</a></li>
+                    
                     
                     @if (auth()->user())
                     <li><a href="/dashboard/">Dashboard</a></li>
+                    @else
+                    <li>
+                        <div class="d-flex p-2.5">
+                            <a href="{{ route('login') }}" class="btn-login fw-semibold px-6 rounded-full hover:bg-orange-600 transition-colors">   Login   </a>
+                        </div>
+                    </li>
                     @endif
+
+
                 </ul>
+                
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>
 

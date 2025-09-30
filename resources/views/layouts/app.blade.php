@@ -7,7 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
 
-    <title>{{ config('app.name', 'Sistem Bukti Dukung Administrasi BPS Provinsi DKI Jakarta') }}</title>
+    <title>{{ config('app.name', 'SATRIA BPS Kabupaten Tulungagung') }}</title>
 
     <!-- Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">

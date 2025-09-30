@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Response;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\FormDataExport;
 
-class DownloadController extends Controller
+class HomeDataController extends Controller
 {
     public function index(Request $request)
     {
@@ -17,7 +17,7 @@ class DownloadController extends Controller
         // $nipPengaju = $user->nip_lama;
         // $idRole = $user->id_role;
 
-        $dataStrategis = DataStrategis::get();
+        $dataStrategis = DataStrategis::where('flag', 1)->get();
 
         // Ambil parameter tanggal mulai dan tanggal akhir dari request
         $tanggalMulai = $request->input('tanggal_mulai');
@@ -37,16 +37,23 @@ class DownloadController extends Controller
         }
 
         // Filter berdasarkan indikator (jika ada)
-        if ($dataStrategisFilter) {
-            $query->whereHas('dataStrategis', function($query) use ($dataStrategisFilter) {
-                $query->where('nama', $dataStrategisFilter);
-            });
-        }
+        // Filter berdasarkan indikator (jika ada) yang memiliki flag = 1
+    if ($dataStrategisFilter) {
+        $query->whereHas('dataStrategis', function($query) use ($dataStrategisFilter) {
+            $query->where('nama', $dataStrategisFilter)
+                  ->where('flag', 1); // Filter data strategis berdasarkan flag = 1
+        });
+    } else {
+        // Filter default untuk indikator dengan flag = 1
+        $query->whereHas('dataStrategis', function($query) {
+            $query->where('flag', 1);
+        });
+    }
 
         
         $formData = $query->get();
 
-        return view('download.index', [
+        return view('data', [
             'formData' => $formData,
             'dataStrategis' => $dataStrategis,
         ]);
@@ -65,9 +72,12 @@ class DownloadController extends Controller
             return back()->with('error', 'Pilih setidaknya satu data untuk diunduh.');
         }
 
-         // Ambil data berdasarkan filter yang dipilih
-        $query = FormData::with(['dataStrategis', 'user'])->whereIn('id', $selectedIds);
-
+        // Ambil data berdasarkan filter yang dipilih
+        $query = FormData::with(['dataStrategis', 'user'])
+                     ->whereIn('id', $selectedIds)
+                     ->whereHas('dataStrategis', function($query) {
+                         $query->where('flag', 1); // Tambahkan filter flag = 1
+        });
         // Filter berdasarkan tanggal mulai
         if ($tanggalMulai) {
             $query->whereDate('tanggal_input', '>=', $tanggalMulai);
@@ -89,7 +99,7 @@ class DownloadController extends Controller
         $data = $query->get();
 
         $csvHeader = [
-            'No','Indikator','Nilai','Satuan','Periode','Tanggal Input','Link Publikasi'
+            'No','Indikator','Nilai','Satuan','Periode','Link Publikasi'
         ];
 
         $csvData = [];
@@ -101,7 +111,6 @@ class DownloadController extends Controller
             $item->nilai,
             $item->satuan,
             $item->periode,
-            $item->tanggal_input,
             $item->link_publikasi,
         ];
               

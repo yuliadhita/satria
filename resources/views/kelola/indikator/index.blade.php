@@ -55,7 +55,7 @@
                                             class="btn {{ $dataStrategis->flag == 1 ? 'btn-outline-success' : 'btn-outline-danger' }} dropdown-toggle"
                                             type="button"
                                             data-bs-toggle="dropdown"
-                                            data-id="{{ $dataStrategis->id }}"
+                                            data-id="{{ $dataStrategis->id_data }}"
                                             data-flag="{{ $dataStrategis->flag }}"
                                             data-akun="{{ $dataStrategis->nama }}">
                                             {{ $dataStrategis->flag == 1 ? 'Tampilkan' : 'Jangan Tampilkan' }}
@@ -63,9 +63,9 @@
                                         <ul class="dropdown-menu" role="menu">
                                             <li>
                                                 @if($dataStrategis->flag != 1)
-                                                    <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#confirmModal" data-id="{{ $dataStrategis->id }}" data-flag="1" data-akun="{{ $dataStrategis->nama }}">Tampilkan</button>
+                                                    <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#confirmModal" data-id="{{ $dataStrategis->id_data }}" data-flag="1" data-akun="{{ $dataStrategis->nama }}">Tampilkan</button>
                                                 @else
-                                                    <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#confirmModal" data-id="{{ $dataStrategis->id }}" data-flag="0" data-akun="{{ $dataStrategis->nama }}">Jangan Tampilkan</button>
+                                                    <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#confirmModal" data-id="{{ $dataStrategis->id_data }}" data-flag="0" data-akun="{{ $dataStrategis->nama }}">Jangan Tampilkan</button>
                                                 @endif
                                             </li>
                                         </ul>
@@ -102,7 +102,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                Apakah Anda yakin ingin <b><span id="modal-action-text"></span></b> akun <b><span id="modal-akun-belanja"></span></b>?
+                Apakah Anda yakin ingin <b><span id="modal-action-text"></span></b> indikator <b><span id="modal-akun-belanja"></span></b>?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Batal</button>
