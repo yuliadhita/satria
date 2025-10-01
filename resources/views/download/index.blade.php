@@ -11,6 +11,13 @@
 @section('content')
 <div class="container">
     <div class="page-inner">
+        <!-- Notifikasi Sukses -->
+        @if(session('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @endif
         <!-- Heading & Filter -->
         <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
             <div>

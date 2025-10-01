@@ -13,7 +13,7 @@
                     
                     <li><a href="{{route('home')}}#about" class="{{ request()->is('#about') ? 'active' : '' }}">Data Strategis</a></li>
                     <li><a href="{{route('data.index')}}" class="{{ request()->routeIs('data.index') ? 'active' : '' }}">Download Data Strategis</a></li>
-                    <li><a href="{{ route('chatbot') }}" class="{{ request()->routeIs('chatbot') ? 'active' : '' }}">Chatbot</a></li>
+                    <!--<li><a href="{{ route('chatbot') }}" class="{{ request()->routeIs('chatbot') ? 'active' : '' }}">Chatbot</a></li>-->
                     
                     
                     @if (auth()->user())

@@ -187,7 +187,7 @@
                         <h1>Statistik <span>Tulungagung </span>Terintegrasi dan Andal</h1>
                         <p>Temukan informasi terkait statistik Kabupaten Tulungagung dengan mudah disini</p>
                         <div class="d-flex">
-                            <a href="/chatbot" class="btn-get-started fw-semibold">Ajukan Pertanyaan</a>
+                            <a href="#about" class="btn-get-started fw-semibold">Data Strategis</a>
                         </div>
                     </div>
                 </div>
