@@ -4,7 +4,8 @@ FROM php:8.2-apache
 # Install dependencies & PHP extensions
 RUN apt-get update && apt-get install -y \
     git unzip libpng-dev libjpeg-dev libfreetype6-dev libonig-dev libzip-dev \
-    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    libwebp-dev libxpm-dev \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp --with-xpm \
     && docker-php-ext-install gd pdo pdo_mysql zip mbstring bcmath
 
 # Install Composer
