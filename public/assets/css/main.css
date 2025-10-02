@@ -148,7 +148,7 @@ h6 {
   --heading-color: rgba(255, 255, 255, 0.722);
   color: var(--default-color);
   background-color: var(--background-color);
-  padding: 0px 0;
+  padding: 15px 0;
   transition: all 0.5s;
   z-index: 997;
 }
@@ -202,9 +202,7 @@ h6 {
 --------------------------------------------------------------*/
 /* Desktop Navigation */
 @media (min-width: 1200px) {
-  .header {
-    padding: 0;
-  }
+
   .navmenu {
     padding: 0;
   }

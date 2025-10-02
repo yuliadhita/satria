@@ -19,11 +19,11 @@
                     @if (auth()->user())
                     <li><a href="/dashboard/">Dashboard</a></li>
                     @else
-                    <li>
+                    <!--<li>
                         <div class="d-flex p-2.5">
                             <a href="{{ route('login') }}" class="btn-login fw-semibold px-6 rounded-full hover:bg-orange-600 transition-colors">   Login   </a>
                         </div>
-                    </li>
+                    </li>-->
                     @endif
 
 

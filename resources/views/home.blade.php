@@ -213,57 +213,43 @@
 
 
         <!-- About Section -->
-        <section id="about" class="about section">
-            <div class="container-fluid" data-aos="fade-up" data-aos-delay="100">
-                <div class="row align-items-center gy-4">
+<section id="about" class="about section">
+  <div class="container-fluid" data-aos="fade-up" data-aos-delay="100">
+    <div class="row align-items-center gy-4">
 
-                    <!-- About Content -->
-                    <div class="row mb-4">
-                        <div class="col-lg-12 text-center">
-                            <div class="content">
-                                <!--<h3>About Us</h3>-->
-                                <h2 class="fw-bold display-6">Data Strategis Kabupaten Tulungagung</h2>
+      <!-- About Content -->
+      <div class="row mb-4">
+        <div class="col-lg-12 text-center">
+          <div class="content">
+            <!--<h3>About Us</h3>-->
+            <h2 class="fw-bold display-6">Data Strategis Kabupaten Tulungagung</h2>
+          </div>
+        </div>
 
-                            </div>
-                        </div>
-                        <!-- Icon Boxes Swiper -->
-                        <div class="relative w-full mt-10">
-                          <!-- Swiper -->
-                          <div class="swiper icon-swiper">
-                            <div class="swiper-wrapper">
-                              @foreach($indikator as $item)
-                                @if($item->latestFormData)
-                                  <div class="swiper-slide !w-[calc(100%-1rem)] md:!w-[280px] !h-auto">
-                                    <!-- Membungkus icon-box dengan link yang mengarah ke halaman yang diinginkan -->
-                                    <a href="{{ $item->latestFormData->link_publikasi }}" class="w-full">
-                                      <div class="icon-box text-center p-6 bg-white rounded-xl shadow hover:shadow-lg transition">
-                                        <i class="{{ $item->icon }} text-primary-4 text-4xl mb-3"></i>
-                                        <h3 class="font-bold text-lg">{{ $item->nama }}</h3>
-                                        <p class="text-gray-600 text-sm">
-                                          {{ $item->latestFormData->nilai }} {{ $item->latestFormData->satuan }}
-                                          ({{ $item->latestFormData->periode }})
-                                        </p>
-                                      </div>
-                                    </a>
-                                  </div>
-                                @endif
-                              @endforeach
-                            </div>
+        <!-- Grid Box -->
+        <div class="row mt-4">
+          @foreach($indikator as $item)
+            @if($item->latestFormData)
+              <div class="col-12 col-md-6 col-lg-4 mb-4">
+                <a href="{{ $item->latestFormData->link_publikasi }}" class="w-full d-block">
+                  <div class="icon-box text-center p-4 bg-white rounded-xl shadow hover:shadow-lg transition h-100">
+                    <i class="{{ $item->icon }} text-primary-4 text-4xl mb-3"></i>
+                    <h3 class="font-bold text-lg">{{ $item->nama }}</h3>
+                    <p class="text-gray-600 text-sm">
+                      {{ $item->latestFormData->nilai }} {{ $item->latestFormData->satuan }}
+                      ({{ $item->latestFormData->periode }})
+                    </p>
+                  </div>
+                </a>
+              </div>
+            @endif
+          @endforeach
+        </div>
 
-                            <!-- Tombol navigasi -->
-                            <div class="swiper-button-next custom-btn"></div>
-                            <div class="swiper-button-prev custom-btn"></div>
-                          </div>
-                        </div>
-
-
-
-
-
-                    </div>
-                </div> <!-- End Main Row -->
-            </div> <!-- End Container -->
-        </section> <!-- /About Section -->
+      </div>
+    </div> <!-- End Main Row -->
+  </div> <!-- End Container -->
+</section> <!-- /About Section -->
     </main>
 
     <x-footer />
