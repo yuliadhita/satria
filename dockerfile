@@ -18,7 +18,7 @@ WORKDIR /var/www/html
 COPY . .
 
 # Install Laravel dependencies
-RUN composer install --no-interaction --prefer-dist --optimize-autoloader
+RUN composer install --no-interaction --prefer-dist --optimize-autoloader --ignore-platform-req=ext-gd
 
 # Laravel storage & bootstrap permission
 RUN chown -R www-data:www-data storage bootstrap/cache \
